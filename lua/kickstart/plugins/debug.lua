@@ -20,6 +20,7 @@ return {
 
     -- Add your own debuggers here
     'leoluz/nvim-dap-go',
+    'microsoft/vscode-cpptools',
   },
   config = function()
     local dap = require 'dap'
@@ -83,16 +84,11 @@ return {
 
     -- Install golang specific config
     require('dap-go').setup()
-    dap.configurations.python = {
-      {
-        type = 'python',
-        request = 'launch',
-        name = "Launch file",
-        program = "${file}",
-        pythonPath = function()
-          return '/usr/bin/python'
-        end,
-      },
+    -- C++ specific config
+    dap.adapters.cppdbg = {
+      id = 'cppdbg',
+      type = 'executable',
+      command = '/home/dario/.local/share/nvim/mason/bin/OpenDebugAD7',
     }
   end,
 }
